@@ -56,6 +56,14 @@ describe('cronParser', () => {
       expect(() => parseCronExpression('* * * *')).toThrow()
       expect(() => parseCronExpression('* * * * * *')).toThrow()
     })
+
+    it('应该抛出错误当步长为 0', () => {
+      expect(() => parseCronExpression('*/0 * * * *')).toThrow('步长值必须大于 0')
+    })
+
+    it('应该抛出错误当带范围的步长为 0', () => {
+      expect(() => parseCronExpression('0 9-17/0 * * *')).toThrow('步长值必须大于 0')
+    })
   })
 
   describe('getNextRunTimes', () => {

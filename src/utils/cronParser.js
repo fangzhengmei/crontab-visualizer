@@ -35,6 +35,10 @@ function parseField(field, fieldType) {
       const base = stepMatch[1]
       const step = parseInt(stepMatch[2], 10)
       
+      if (step <= 0) {
+        throw new Error(`步长值必须大于 0，当前值为 ${step}`)
+      }
+      
       let start, end
       if (base === '*') {
         start = min
